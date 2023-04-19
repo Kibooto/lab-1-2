@@ -24,14 +24,23 @@ void pprintArray(int* arr, int size) {
 
 int* intersection(int* arr1, int size1, int* arr2, int size2, int* size3) {
     int* arr3 = (int*)malloc(*size3 * sizeof(int));
+    int flag = 0;
     *size3 = 0;
 
     for (int i = 0; i < size1; i++) {
         for (int j = 0; j < size2; j++) {
             if (arr1[i] == arr2[j]) {
-                arr3[*size3] = arr1[i];
-                (*size3)++;
-                break;
+                for(int k = 0; k < (*size3); k++){
+                    if (arr1[i] == arr3[k]){
+                        flag = 1;
+                    }
+                }
+                if (flag == 0){
+                    arr3[*size3] = arr1[i];
+                    (*size3)++;
+                    break;
+                }
+                flag = 0;
             }
         }
     }
@@ -47,10 +56,10 @@ int sum(int* arr, int size) {
     return result;
 }
 
-int max(int* arr, int size) {
+int min(int* arr, int size) {
     int result = arr[0];
     for (int i = 1; i < size; i++) {
-        if (arr[i] > result) {
+        if (arr[i] < result) {
             result = arr[i];
         }
     }
@@ -74,8 +83,7 @@ int three() {
     printf("Intersection of A and B: ");
     pprintArray(C, sizeC);
 
-    printf("Sum of intersection: %d\n", sum(C, sizeC));
-    printf("Max element of intersection: %d\n", max(C, sizeC));
+    printf("Min element of intersection: %d\n", min(C, sizeC));
 
     free(A);
     free(B);
