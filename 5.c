@@ -27,6 +27,18 @@ void addMatrices(int **A, int **B, int **C, int rows, int cols) {
     }
 }
 
+void pprintArray(int **arr, int rows, int cols) {
+        // Виведення елементів матриці на екран
+    printf("Елементи матриці C (сума елементів матриць A та B):\n");
+    for (int i = 0; i < rows; i++) {
+        for (int j = 0; j < cols; j++) {
+            printf("%d ", arr[i][j]);
+        }
+        printf("\n");
+    }
+    printf("\n");
+}
+
 int main() {
     int rows, cols;
     printf("Введіть розмір матриць: ");
@@ -52,14 +64,12 @@ int main() {
 
     // Створення матриці та додавання матриць
     int **C = createMatrix(rows, cols);
+    
     addMatrices(A, B, C, rows, cols);
 
-    // Виведення елементів матриці на екран
-    printf("Елементи матриці C (сума елементів матриць A та B):\n");
-    for (int i = 0; i < rows; i++) {
-        for (int j = 0; j < cols; j++) {
-            printf("%d ", C[i][j]);
-        }
-        printf("\n");
-    }
+    pprintArray(C, rows, cols);
+
+    freeMatrix(A, rows);
+    freeMatrix(B, rows);
+    freeMatrix(C, rows);
 }
